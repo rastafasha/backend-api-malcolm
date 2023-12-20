@@ -13,6 +13,15 @@ Route::get('/product/config', [ProductController::class, 'config'] )->name('conf
     Route::post('/product/upload_video/{id}', [ProductController::class, 'upload_video'] )->name('upload_video');
     Route::post('/product/{id}', [ProductController::class, 'update'] )->name('update');
     
+    Route::put('/product/update/status/{product:id}', [ProductController::class, 'updateStatus'])
+    ->name('product.status');
+
+    Route::get('/product/recientes', [productController::class, 'recientes'])
+    ->name('product.recientes');
+
+    Route::get('/product/destacados', [productController::class, 'destacados'])
+    ->name('product.destacados');
+
     //secciones
     Route::resource('/product-section', SectionProductController::class );
     Route::put('/product-section/{id}', [SectionProductController::class, 'update'] )->name('update');

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class CourseSection extends Model
+class ProductSection extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -31,12 +31,12 @@ class CourseSection extends Model
 
     // relaciones
 
-    public function course(){
-        return $this->belongsTo(Course::class);
+    public function product(){
+        return $this->belongsTo(Product::class);
     }
 
-    public function classes(){
-        return $this->hasMany(CourseClasse::class, "course_section_id");
+    public function product_classes(){
+        return $this->hasMany(ProductClasse::class, "product_section_id");
     }
 
     function AddTimes($horas)

@@ -219,6 +219,7 @@ class portafolioController extends Controller
         $request ->request->add(['slug' => Str::slug($request->title)]);
 
         $portafolio->update();
+        error_log($portafolio);
 
         return response()->json(['portafolio'=> PortafolioResource::make($portafolio)]);
 

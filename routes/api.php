@@ -116,6 +116,8 @@ Route::group(['middleware' => 'api'], function ($router) {
 
     // product
     require __DIR__ . '/api_routes/product.php';
+    // categoryproduct
+    require __DIR__ . '/api_routes/categoryproduct.php';
 
     // // subcripcion
     require __DIR__ . '/api_routes/subcripcion.php';

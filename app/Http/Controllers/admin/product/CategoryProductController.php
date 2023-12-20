@@ -30,43 +30,19 @@ class CategoryProductController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         if($request->hasFile('portada')){
-            $path = Storage::putFile('categories', $request -> file('portada'));
+            $path = Storage::putFile('categories_products', $request -> file('portada'));
             $request->request->add(['imagen'=>$path]);
         }
 
-        $category = CategoryProduct::create($request->all());
+        $category_product = CategoryProduct::create($request->all());
 
-        return response()->json(['category'=> CategoryProductResource::make($category)]);
+        return response()->json(['category_product'=> CategoryProductResource::make($category_product)]);
 
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**
@@ -74,19 +50,19 @@ class CategoryProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $category = CategoryProduct::findOrFail($id);
+        $category_product = CategoryProduct::findOrFail($id);
         if($request->hasFile('portada')){
             //verifica si tiene imagen o no para actualizar
-            if($category->imagen){
-                Storage::delete($category->imagen);
+            if($category_product->imagen){
+                Storage::delete($category_product->imagen);
             }
-            $path = Storage::putFile('categories', $request -> file('portada'));
+            $path = Storage::putFile('categories_products', $request -> file('portada'));
             $request->request->add(['imagen'=>$path]);
         }
 
-        $category -> update($request->all());
+        $category_product -> update($request->all());
 
-        return response()->json(['category'=> CategoryProductResource::make($category)]);
+        return response()->json(['category_product'=> CategoryProductResource::make($category_product)]);
     }
 
     /**

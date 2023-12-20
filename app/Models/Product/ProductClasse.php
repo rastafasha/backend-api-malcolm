@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class CourseClasse extends Model
+class ProductClasse extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $fillable =[
-        'course_section_id',
+        'product_section_id',
         'name',
         'description',
         'vimeo_id',
@@ -32,12 +32,12 @@ class CourseClasse extends Model
         $this->attribute['updated_at']= Carbon::now();
     }
     // relaciones
-    public function course_section(){
-        return $this->belongsTo(CourseSection::class);
+    public function product_section(){
+        return $this->belongsTo(ProductSection::class);
     }
 
     public function files(){
-        return $this->hasMany(CourseClasseFile::class, "course_clase_id");
+        return $this->hasMany(ProductClasseFile::class, "course_clase_id");
     }
 
     function AddTimes($horas)

@@ -44,6 +44,10 @@ class ProductResource extends JsonResource
                 'description'=>$this->resource-> description,
                 'who_is_it_for'=>json_decode($this->resource-> who_is_it_for),
                 'requirements'=> json_decode($this->resource-> requirements),
+                'colors'=> json_decode($this->resource-> colors),
+                'peso'=> json_decode($this->resource-> peso),
+                'medida'=> json_decode($this->resource-> medida),
+                'material'=> json_decode($this->resource-> material),
                 'state'=>$this->resource-> state,
         ];
     }

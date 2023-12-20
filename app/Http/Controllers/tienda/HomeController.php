@@ -53,7 +53,7 @@ class HomeController extends Controller
                                 ->get();
         $categories_products =CategoryProduct::where("category_product_id", null)
                                 ->withCount("products")
-                                ->having("products_count",">",0)
+                                // ->having("products_count",">",0)
                                 ->orderBy("id", "desc")
                                 ->take(5)
                                 ->get();
@@ -150,6 +150,15 @@ class HomeController extends Controller
                     
                 ];
             }),
+            // "categories_product" =>$categories_product ->map(function($categories_product){
+            //     return [
+            //         "id"=>$categories_product->id,
+            //         "nombre"=>$categories_product->nombre,
+            //         "imagen"=> env("APP_URL")."storage/".$categories_product->imagen,
+            //         "products_count"=>$categories_product->products_count,
+                    
+            //     ];
+            // }),
             "courses_home"=> CourseHomeCollection::make($courses),
             "products_home"=> ProductHomeCollection::make($products),
             "group_courses_categories"=> $group_courses_categories,
@@ -278,15 +287,21 @@ class HomeController extends Controller
                     ->withCount("courses")
                     ->orderBy("id", "desc")
                     ->get();
+        $categories_products =CategoryProduct::where("category_product_id", null)
+                    ->withCount("products")
+                    ->orderBy("id", "desc")
+                    ->get();
         
         $instructores = User::where("isInstructor",1)->orderBy("id","desc")->get();
         
         return response()->json([
             "categories"=>$categories,
+            "categories_products"=>$categories_products,
             "instructores" => $instructores->map(function($instructor){
                 return [
                     "id" => $instructor->id,
                     "courses_count" => $instructor->courses_count,
+                    "products_count" => $instructor->products_count,
                     "full_name" => $instructor->name.' '.$instructor->surname,
                 ];
             }),

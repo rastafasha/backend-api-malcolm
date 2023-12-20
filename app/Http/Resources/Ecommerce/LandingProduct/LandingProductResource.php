@@ -39,9 +39,9 @@ class LandingProductResource extends JsonResource
             'price_bves'=>$this->resource-> price_bves,
             'count_class'=>$this->resource-> count_class,
             'files_count'=>$this->resource-> files_count,
-            // 'count_students'=>$this->resource-> count_students,
-            // 'avg_reviews'=>$this->resource-> avg_reviews ? round($this->resource-> avg_reviews,2): 0,
-            // 'count_reviews'=>$this->resource-> count_reviews,
+            'count_students'=>$this->resource-> count_students,
+            'avg_reviews'=>$this->resource-> avg_reviews ? round($this->resource-> avg_reviews,2): 0,
+            'count_reviews'=>$this->resource-> count_reviews,
             'discount_g'=>$discount_g,
             'discount_date'=>$discount_g ? Carbon::parse($discount_g->end_date,)->format("Y-m-d"):NULL,
             'category_product_id'=>$this->resource-> category_product_id,
@@ -58,43 +58,26 @@ class LandingProductResource extends JsonResource
             'description'=>$this->resource-> description,
                 'who_is_it_for'=>json_decode($this->resource-> who_is_it_for),
                 'requirements'=> json_decode($this->resource-> requirements),
+                'colors'=> json_decode($this->resource-> colors),
+                'peso'=> json_decode($this->resource-> peso),
+                'medida'=> json_decode($this->resource-> medida),
+                'material'=> json_decode($this->resource-> material),
             "imagen"=> $this->resource->imagen ? env("APP_URL")."storage/".$this->resource->imagen : null,
             // "imagen"=> $this->resource->imagen ? env("APP_URL").$this->resource->imagen : null,
             
-                //malla curricular
-                // "malla"=>$this->resource->sections->map(function($section){
-                //     return[
-                //         "id"=>$section->id,
-                //         "name"=>$section->name,
-                //         "clases"=>$section->classes->map(function($classe){
-                //             return[
-                //                 "id"=>$classe->id,
-                //                 "name"=>$classe->name,
-                //                 "vimeo"=>$classe->vimeo_id ? "https://player.vimeo.com/video/".$this->resource-> vimeo_id : NULL,
-                //                 "file"=>$classe->files->map(function($file){
-                //                     return [
-                //                         "name"=> $file->name_file,
-                //                         "url"=> env("APP_URL")."storage/".$file->file,
-                //                         "size"=>$file->size,
-
-                //                     ];
-                //                 })
-                //             ];
-                //         })
-                //     ];
-                // }),
+                
                 "updated_at"=>$this->resource->updated_at->format("m/Y"),
-                // "reviews"=>$this->resource->reviews->map(function($review){
-                //     return[
-                //         "message"=>$review->message,
-                //         "rating"=>$review->rating,
-                //         "user"=>[
-                //             "full_name"=>$review->user->name.''.$review->user->surname,
-                //             // "avatar"=> env("APP_URL")."storage/".$review->user->avatar
-                //             "avatar"=> env("APP_URL").$review->user->avatar
-                //         ]
-                //     ];
-                // })
+                "reviews"=>$this->resource->reviews->map(function($review){
+                    return[
+                        "message"=>$review->message,
+                        "rating"=>$review->rating,
+                        "user"=>[
+                            "full_name"=>$review->user->name.''.$review->user->surname,
+                            // "avatar"=> env("APP_URL")."storage/".$review->user->avatar
+                            "avatar"=> env("APP_URL").$review->user->avatar
+                        ]
+                    ];
+                })
 
         ];
     }

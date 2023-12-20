@@ -71,6 +71,7 @@ class LandingCursoResource extends JsonResource
                 "id"=>$this->resource->instructor->id,
                 "profesion"=>$this->resource->instructor->profesion,
                 "courses_count"=>$this->resource->instructor->courses_count,
+                "products_count"=>$this->resource->instructor->products_count,
                 "description"=>$this->resource->instructor->description,
                 "full_name"=>$this->resource->instructor->name.' '.$this->resource->instructor->surname,
                 // "avatar"=>env("APP_URL").$this->resource->instructor->avatar,

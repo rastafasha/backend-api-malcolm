@@ -6,6 +6,7 @@ use App\Models\Sale\Cart;
 use Illuminate\Http\Request;
 use App\Models\Coupon\Coupon;
 use App\Models\CoursesStudent;
+use App\Models\ProductsStudent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Ecommerce\Cart\CartResource;
 use App\Http\Resources\Ecommerce\Cart\CartCollection;
@@ -34,8 +35,10 @@ class CartController extends Controller
         $user = auth('api')->user();
         //si el curso ya pertenece al student
         $isHaveCourse = CoursesStudent::where("user_id", $user->id)->where("course_id",$request->course_id)->first();
+        $isHaveProduct = ProductsStudent::where("user_id", $user->id)->where("product_id",$request->product_id)->first();
         //si el curso ya existe en el carrito
         $isExistCart = Cart::where("user_id", $user->id)->where("course_id",$request->course_id)->first();
+        $isExistCartProduct = Cart::where("user_id", $user->id)->where("product_id",$request->product_id)->first();
         if($isHaveCourse){
             return response()->json([
                 "message"=>403,
@@ -43,6 +46,19 @@ class CartController extends Controller
             ]);
         }
         if($isExistCart){
+            return response()->json([
+                "message"=>403,
+                "message_text"=>"El curso ya en la lista"
+            ]);
+        }
+
+        if($isHaveProduct){
+            return response()->json([
+                "message"=>403,
+                "message_text"=>"Ya has adiquirido este curso"
+            ]);
+        }
+        if($isExistCartProduct){
             return response()->json([
                 "message"=>403,
                 "message_text"=>"El curso ya en la lista"

@@ -20,7 +20,7 @@ Route::get('/portafolio/activos', [portafolioController::class, 'activos'])
 Route::get('/portafolio/showbyName/{portafolio:name}', [portafolioController::class, 'show'])
     ->name('portafolio.show');
 
-Route::post('/portafolio/update/{portafolio}', [portafolioController::class, 'update'])
+Route::post('/portafolio/update/{id}', [portafolioController::class, 'update'])
     ->name('portafolio.update');
 
 Route::delete('/portafolio/destroy/{portafolio}', [portafolioController::class, 'destroy'])

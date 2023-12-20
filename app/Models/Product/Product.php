@@ -30,13 +30,15 @@ class Product extends Model
         'user_id',
         'category_product_id',
         'sub_category_id',
-        'level',
-        'idioma',
         'vimeo_id',
         'time',
         'description',
         'requirements',
         'who_is_it_for',
+        'colors',
+        'peso',
+        'medida',
+        'material',
         'state',
 
     ];
@@ -113,11 +115,11 @@ class Product extends Model
             $query->where('title', 'like', '%'.$search.'%');
         }
         if(sizeof($selectedCategories) > 0){
-            $query->whereIn('category_id',$selectedCategories);
+            $query->whereIn('category_product_id',$selectedCategories);
         }
-        if(sizeof($instructoresSelected) > 0){
-            $query->whereIn('user_id',$instructoresSelected);
-        }
+        // if(sizeof($instructoresSelected) > 0){
+        //     $query->whereIn('user_id',$instructoresSelected);
+        // }
         if($min_price > 0 && $max_price > 0 ){
             $query->whereBetween('price_usd', [$min_price, $max_price]);
         }
@@ -142,20 +144,20 @@ class Product extends Model
         }
         return $discount;
     }
-    // public function getDiscountCTAttribute(){
-    //     date_default_timezone_set("America/Caracas");
-    //     $discount = null;
-    //     foreach ($this->category->discount_categories as $key => $discount_categorie) {
-    //         if($discount_categorie->discount->type_campaing == 1 && $discount_categorie->discount->state == 1){
-    //             if(Carbon::now()->between($discount_categorie->discount->start_date, Carbon::parse($discount_categorie->discount->end_date)->addDays(1))){
-    //                 //existe una campaña de descuento con el curso
-    //                 $discount = $discount_categorie->discount;
-    //                 break;
-    //             }
-    //         }
-    //     }
-    //     return $discount;
-    // }
+    public function getDiscountCTPAttribute(){
+        date_default_timezone_set("America/Caracas");
+        $discount = null;
+        foreach ($this->category->discount_categories as $key => $discount_categorie) {
+            if($discount_categorie->discount->type_campaing == 1 && $discount_categorie->discount->state == 1){
+                if(Carbon::now()->between($discount_categorie->discount->start_date, Carbon::parse($discount_categorie->discount->end_date)->addDays(1))){
+                    //existe una campaña de descuento con el curso
+                    $discount = $discount_categorie->discount;
+                    break;
+                }
+            }
+        }
+        return $discount;
+    }
 
     
 

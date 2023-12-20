@@ -55,6 +55,10 @@ class ProductHomeResource extends JsonResource
             'idioma'=>$this->resource-> idioma,
             'level'=>$this->resource-> level,
             'discount_g'=>$discount_g,
+            'colors'=> json_decode($this->resource-> colors),
+            'peso'=> json_decode($this->resource-> peso),
+            'medida'=> json_decode($this->resource-> medida),
+            'material'=> json_decode($this->resource-> material),
             'count_students'=>$this->resource-> count_students,
             'avg_reviews'=>$this->resource-> avg_reviews ? round($this->resource-> avg_reviews,2): 0,
             'count_reviews'=>$this->resource-> count_reviews,
@@ -67,7 +71,8 @@ class ProductHomeResource extends JsonResource
                 "avatar"=>env("APP_URL")."storage/".$this->resource->instructor->avatar,
                 // "avatar"=>env("APP_URL").$this->resource->instructor->avatar,
 
-            ] : NULL
+            ] : NULL,
+            
         ];
     }
 }
