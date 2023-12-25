@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\portafolio;
 
-use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Portafolio\Categoria;
 use App\Http\Resources\Portafolio\CategoriaResource;
 use App\Http\Resources\Portafolio\CategoriaCollection;
 

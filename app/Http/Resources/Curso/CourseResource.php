@@ -22,8 +22,14 @@ class CourseResource extends JsonResource
                 'slug'=>$this->resource-> slug,
                 'price_usd'=>$this->resource-> price_usd,
                 'price_bves'=>$this->resource-> price_bves,
-                "imagen"=> $this->resource->imagen ? env("APP_URL")."storage/".$this->resource->imagen : null,
-                // "imagen"=> $this->resource->imagen ? env("APP_URL").$this->resource->imagen : null,
+                "imagen"=> $this->resource->imagen ? env("APP_URL").$this->resource->imagen : null,
+                // "imagen"=> $this->resource->imagen ? env("APP_URL")."storage/".$this->resource->imagen : null,
+                'category_sale_id'=>$this->resource->category_sale_id,
+                "sale_category" =>$this->resource->sale_category ?
+                [
+                    'id'=> $this->resource->sale_category->id,
+                    'name'=> $this->resource->sale_category->name
+                ]: NUll,
                 'category_id'=>$this->resource-> category_id,
                 'category'=>[
                     'id'=> $this->resource->category->id,
@@ -32,7 +38,7 @@ class CourseResource extends JsonResource
                 'sub_category_id'=>$this->resource->sub_category_id,
                 'sub_category'=>[
                     'id'=> $this->resource->sub_category->id,
-                    'name'=> $this->resource->sub_category->nombre
+                    'nombre'=> $this->resource->sub_category->nombre
                 ],
                 'user_id'=>$this->resource-> user_id,
                 'user'=>[

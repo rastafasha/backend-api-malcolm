@@ -4,10 +4,12 @@ namespace App\Models\Course;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Categoria;
 use App\Models\Sale\Review;
 use App\Models\CoursesStudent;
 use App\Models\Course\Category;
 use App\Models\Course\CourseSection;
+use App\Models\Sale\CategoriaVentas;
 use App\Models\Discount\DiscountCourse;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Discount\DiscountCategorie;
@@ -29,6 +31,7 @@ class Course extends Model
         'user_id',
         'category_id',
         'sub_category_id',
+        'category_sale_id',
         'level',
         'idioma',
         'vimeo_id',
@@ -61,6 +64,8 @@ class Course extends Model
         return $this->belongsTo(Category::class);
     }
 
+    
+
     public function sub_category(){
         return $this->belongsTo(Category::class);
     }
@@ -82,6 +87,10 @@ class Course extends Model
 
     public function reviews(){
         return $this->hasMany(Review::class);
+    }
+
+    public function sale_category(){
+        return $this->belongsTo(CategoriaVentas::class, 'category_sale_id');
     }
 
 

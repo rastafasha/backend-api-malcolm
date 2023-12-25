@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\portafolio;
 
-use App\Models\Portafolio;
+
+use App\Models\Portafolio\Portafolio;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;

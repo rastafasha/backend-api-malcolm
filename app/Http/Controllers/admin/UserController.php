@@ -129,7 +129,8 @@ class UserController extends Controller
         return response()->json([
             'code' => 200,
             'status' => 'success',
-            'user' => $user,
+            // 'user' => $user,
+            'user'=> UserGResource::make($user)
         ], 200);
     }
 

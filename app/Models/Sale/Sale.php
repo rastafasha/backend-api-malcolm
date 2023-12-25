@@ -18,6 +18,8 @@ class Sale extends Model
         "method_payment",
         "currency_total",
         "currency_payment",
+        "product_id",
+        "course_id",
         "total",
         "price_dolar",
         "n_transaccion",
@@ -44,5 +46,22 @@ class Sale extends Model
 
     public function sale_details(){
         return $this->hasMany(SaleDetail::class);
+    }
+
+    // buscar 
+
+    public function scopeSaleFilterAdvance($query, $search, $status)
+    {
+        if($search){
+            $query->where('method_payment', 'like', '%'.$search.'%')
+            ->orWhere('total', 'like', '%'.$search.'%')
+            ->orWhere('price_dolar', 'like', '%'.$search.'%')
+            ->orWhere('N_TRANSACCION', 'like', '%'.$search.'%');
+        }
+        
+        if($status){
+            $query->where('status', $status);
+        }
+        return $query;
     }
 }

@@ -32,7 +32,8 @@ class CourseClaseResource extends JsonResource
                     'size'=> $file->size,
                     'time'=> $file->time,
                     'resolution'=> $file->resolution,
-                    'file'=> env("APP_URL")."storage/".$file->file,
+                    // 'file'=> env("APP_URL")."storage/".$file->file,
+                    'file'=> env("APP_URL").$file->file,
                     'type'=> $file->type,
                 ];
             })

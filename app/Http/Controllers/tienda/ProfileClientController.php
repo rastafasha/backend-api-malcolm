@@ -88,9 +88,16 @@ class ProfileClientController extends Controller
                     "id"=> $sale_detail->id,
                     "review"=> $sale_detail->review,
                     "course"=> [
-                        "id"=>$sale_detail->course->id,
-                        "title"=>$sale_detail->course->title,
-                        "imagen"=>env("APP_URL")."storage/".$sale_detail->course->imagen,
+                        "id"=>$sale_detail->course->id ?? null,
+                        "title"=>$sale_detail->course->title ?? null,
+                        "slug"=>$sale_detail->course->slug ?? null,
+                        // "imagen"=>env("APP_URL")."storage/".$sale_detail->course->imagen ?: null,
+                    ],
+                    "product"=> [
+                        "id"=>$sale_detail->product->id ?? null,
+                        "title"=>$sale_detail->product->title ?? null,
+                        "slug"=>$sale_detail->product->slug ?? null,
+                        // "imagen"=>env("APP_URL")."storage/".$sale_detail->product->imagen ?: null,
                     ],
                     "created_at"=>$sale_detail->created_at->format("Y-m-d h:i:s")
                 ];

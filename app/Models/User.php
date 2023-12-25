@@ -7,6 +7,7 @@ use App\Models\Blog;
 use App\Models\Direccion;
 use App\Models\Sale\Sale;
 use App\Models\Course\Course;
+use App\Models\Product\Product;
 use App\Models\Sale\SaleDetail;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -86,6 +87,10 @@ class User extends Authenticatable implements JWTSubject
     public function courses()
     {
         return $this->hasMany(Course::class)->where("state",2);
+    }
+    public function products()
+    {
+        return $this->hasMany(Product::class)->where("state",2);
     }
     public function sales()
     {

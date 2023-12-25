@@ -23,7 +23,7 @@ class deliveryController extends Controller
         $deliveries = Delivery::orderby('id', 'desc')->get();
 
         return response()->json([
-            "deliveries" => DeliveryCollection::make($deliveries)
+            "deliveries" => $deliveries
         ]);
     }
 

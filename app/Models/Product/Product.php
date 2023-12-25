@@ -4,10 +4,12 @@ namespace App\Models\Product;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Categoria;
 use App\Models\Sale\Review;
 use App\Models\ProductsStudent;
-use App\Models\Product\CategoryProduct;
+use App\Models\Sale\CategoriaVentas;
 use App\Models\Product\ProductSection;
+use App\Models\Product\CategoryProduct;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Discount\DiscountProduct;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -30,6 +32,7 @@ class Product extends Model
         'user_id',
         'category_product_id',
         'sub_category_id',
+        'category_sale_id',
         'vimeo_id',
         'time',
         'description',
@@ -68,6 +71,8 @@ class Product extends Model
         return $this->belongsTo(CategoryProduct::class);
     }
 
+    
+
     public function sections(){
         return $this->hasMany(ProductSection::class);
     }
@@ -79,12 +84,16 @@ class Product extends Model
         return $this->hasMany(DiscountProductCategorie::class);
     }
 
-    public function product_students(){
+    public function products_students(){
         return $this->hasMany(ProductsStudent::class);
     }
 
     public function reviews(){
         return $this->hasMany(Review::class);
+    }
+
+    public function sale_category(){
+        return $this->belongsTo(CategoriaVentas::class, 'category_sale_id');
     }
 
 

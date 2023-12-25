@@ -20,15 +20,7 @@ class CartResource extends JsonResource
             "address" =>$this->resource->user_id,
             "address"=> $this->resource->address ?[
                 "user_id" =>$this->resource->user_id,
-                // "title"=>$this->resource->address->title,
-            ]: null,
-            "product_id" =>$this->resource->product_id,
-            "product"=> $this->resource->product_id ?[
-                "title"=>$this->resource->product->title,
-                "slug"=>$this->resource->product->slug,
-                "imagen"=>env("APP_URL")."storage/".$this->resource->product->imagen,
-                // "imagen"=>env("APP_URL").$this->resource->course->imagen,
-                "subtitle"=>$this->resource->product->subtitle,
+                "title"=>$this->resource->address->title,
             ]: null,
             "course_id" =>$this->resource->course_id,
             "course"=>$this->resource->course_id ? [
@@ -38,6 +30,15 @@ class CartResource extends JsonResource
                 // "imagen"=>env("APP_URL").$this->resource->course->imagen,
                 "subtitle"=>$this->resource->course->subtitle,
             ]: null,
+            "product_id" =>$this->resource->product_id,
+            "product"=> $this->resource->product_id ?[
+                "title"=>$this->resource->product->title,
+                "slug"=>$this->resource->product->slug,
+                "imagen"=>env("APP_URL")."storage/".$this->resource->product->imagen,
+                // "imagen"=>env("APP_URL").$this->resource->course->imagen,
+                "subtitle"=>$this->resource->product->subtitle,
+            ]: null,
+            
             "type_discount" =>$this->resource->type_discount,
             "discount" =>$this->resource->discount,
             "type_campaing" =>$this->resource->type_campaing,

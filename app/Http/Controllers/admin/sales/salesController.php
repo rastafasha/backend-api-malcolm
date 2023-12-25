@@ -2,33 +2,43 @@
 
 namespace App\Http\Controllers\admin\sales;
 
+use App\Models\Categoria;
 use App\Models\Sale\Sale;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Sale\CategoriaVentas;
+use App\Http\Resources\Ecommerce\Sale\SaleCollection;
 
 class salesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $sales = Sale::orderBy('created_at', 'DESC')
-        ->get();
+
+        $search = $request->search;
+        $status = $request->status;
+        
+        $sales = Sale::saleFilterAdvance($search, $status)->orderby('id', 'desc')->get();
 
         return response()->json([
-            'code' => 200,
-            'status' => 'Listar todos las ventas',
-            'sales' => $sales,
-        ], 200);
+            "sales" => SaleCollection::make($sales),
+            // "tota"=>total()
+        ]);
+        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function categoriasVentas( Request $request)
     {
-        //
+        // where("category_id",NULL)->
+        $salecategories = CategoriaVentas::orderBy("id","desc")->get();
+
+        return response()->json([
+            "salecategories" => $salecategories,
+        ]);
+
+
     }
 
     /**
@@ -53,7 +63,7 @@ class salesController extends Controller
         return response()->json([
             'code' => 200,
             'status' => 'success',
-            'sale' => $sale,
+            'sale' => SaleResource::make($sale)
         ], 200);
     }
 
@@ -111,4 +121,51 @@ class salesController extends Controller
     {
         //
     }
+
+    
+    public function config()
+    {
+        $sales = Sale::orderBy('created_at', 'DESC')
+        ->get();
+
+        return response()->json([
+            'code' => 200,
+            'status' => 'Listar todos las ventas',
+            'sales' => $sales,
+        ], 200);
+    }
+    public function pedidoEntregado()
+    {
+        $sales = Sale::orderBy('created_at', 'DESC')
+        ->where('status', 2)
+        ->get();
+
+        return response()->json([
+            'code' => 200,
+            'status' => 'Listar todos las entregas',
+            'sales' => $sales,
+        ], 200);
+    }
+    public function pedidoCancelados()
+    {
+       
+        $sales = Sale::orderBy('created_at', 'DESC')
+        ->where('status', 3)
+        ->get();
+
+        return response()->json([
+            'code' => 200,
+            'status' => 'Listar todos las cancelaciones',
+            'sales' => $sales,
+        ], 200);
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $sale = Sale::findOrfail($id);
+        $sale->status = $request->status;
+        $sale->update();
+        return $sale;
+    }
+
 }

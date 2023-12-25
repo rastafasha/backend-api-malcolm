@@ -30,8 +30,8 @@ class DiscountResource extends JsonResource
                 return[
                     'id'=>$course_aux->course?->id,
                     'title'=>$course_aux->course?->title,
-                    'imagen'=>env("APP_URL")."storage/".$course_aux->course->imagen,
-                    // 'imagen'=>env("APP_URL").$course_aux->course->imagen,
+                    // 'imagen'=>env("APP_URL")."storage/".$course_aux->course->imagen,
+                    'imagen'=>env("APP_URL").$course_aux->course->imagen,
                     'aux_id'=>$course_aux->id
                 ];
             }),
@@ -39,8 +39,8 @@ class DiscountResource extends JsonResource
                 return[
                     'id'=>$product_aux->product?->id,
                     'title'=>$product_aux->product?->title,
-                    'imagen'=>env("APP_URL")."storage/".$product_aux->product->imagen,
-                    // 'imagen'=>env("APP_URL").$course_aux->course->imagen,
+                    // 'imagen'=>env("APP_URL")."storage/".$product_aux->product->imagen,
+                    'imagen'=>env("APP_URL").$course_aux->course->imagen,
                     'aux_id'=>$product_aux->id
                 ];
             }),

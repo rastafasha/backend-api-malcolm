@@ -44,11 +44,11 @@ class SaleDetail extends Model
     }
 
     public function course(){
-        return $this->belongsTo(Course::class);
+        return $this->belongsTo(Course::class,"course_id");
 
     }
     public function product(){
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class,"product_id");
 
     }
 
@@ -64,5 +64,11 @@ class SaleDetail extends Model
     public function review_products(){
         return $this->hasOne(ReviewProducts::class);
 
+    }
+
+   
+
+    public function sale_category(){
+        return $this->belongsTo(Categoria_ventas::class);
     }
 }

@@ -26,10 +26,10 @@ class PortafolioResource extends JsonResource
             'url'=>$this->resource-> url,
             "imagen"=> $this->resource->imagen ? env("APP_URL")."storage/".$this->resource->imagen : null,
             'status'=>$this->resource-> status,
-            'category_id'=>$this->resource-> category_id,
+            'category_portafolio_id'=>$this->resource-> category_portafolio_id ?? null,
             'categorias'=>[
-                'id'=> $this->resource->categorias->id,
-                'name'=> $this->resource->categorias->name
+                'id'=> $this->resource->category_portafolio_id ?? null,
+                'name'=> $categorias->name ?? null
             ],
             'user_id'=>$this->resource-> user_id,
             // 'user'=>[

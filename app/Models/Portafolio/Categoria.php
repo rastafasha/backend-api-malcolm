@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Portafolio;
 
-use App\Models\Categoria;
-use App\Models\Portafolio;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -19,7 +17,6 @@ class Categoria extends Model
 
         'name',
         'status',
-
     ];
 
     const PUBLISHED = 'PUBLISHED';
@@ -47,6 +44,8 @@ class Categoria extends Model
     {
         return $this->hasMany(Portafolio::class);
     }
+
+    
 
      /*
     |--------------------------------------------------------------------------

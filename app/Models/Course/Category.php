@@ -3,7 +3,6 @@
 namespace App\Models\Course;
 
 use Carbon\Carbon;
-use App\Models\Blog;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Discount\DiscountCategorie;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -44,10 +43,7 @@ class Category extends Model
         return $this->hasMany(Course::class);
         
     }
-    public function blogs(){
-        return $this->hasMany(Blog::class);
-        
-    }
+    
     public function discount_categories(){
         return $this->hasMany(DiscountCategorie::class);
         

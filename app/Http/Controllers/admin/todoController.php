@@ -20,7 +20,11 @@ class todoController extends Controller
         
         // filterAdvance($search, $status)->
 
-        $todos = Todo::orderby('id', 'desc')->get();
+        $todos = Todo::orderby('id', 'desc')
+        ->where('status', "pending")
+        ->orWhere('status', "activo")
+        ->orWhere('status', "urgente")
+        ->get();
 
         return response()->json([
             "todos" => TodoCollection::make($todos)
@@ -101,5 +105,33 @@ class todoController extends Controller
                 'todos' => $todos,
             ], 200);
     }
+
+    public function pendientes()
+    {
+       
+        $todos = Todo::orderBy('created_at', 'DESC')
+        ->where('status', "pending")
+        ->get();
+
+        return response()->json([
+            'code' => 200,
+            'status' => 'Listar todos las pendientes',
+            'todos' => $todos,
+        ], 200);
+    }
+    public function terminados()
+    {
+       
+        $terminados = Todo::orderBy('created_at', 'DESC')
+        ->where('status', "terminado")
+        ->get();
+
+        return response()->json([
+            'code' => 200,
+            'status' => 'Listar todos terminados',
+            'terminados' => $terminados,
+        ], 200);
+    }
+
 }
 

@@ -6,7 +6,10 @@ use App\Mail\SaleMail;
 use App\Models\Sale\Cart;
 use App\Models\Sale\Sale;
 use Illuminate\Http\Request;
+use App\Models\Course\Course;
 use App\Models\CoursesStudent;
+use App\Models\Product\Product;
+use App\Models\ProductsStudent;
 use App\Models\Sale\SaleDetail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
@@ -45,10 +48,24 @@ class CheckoutController extends Controller
             $newDetail = $cart->toArray();
             $newDetail["sale_id"] = $sale->id;
             SaleDetail::create($newDetail);
-            CoursesStudent::create([
-                "course_id" => $newDetail["course_id"],
-                "user_id" => auth('api')->user()->id,
-            ]);
+
+            
+            $if_existCourse = Course::where('id', $request->course_id)->first();
+            $if_existProduct = Product::where('id', $request->product_id)->first();
+            if($if_existCourse){
+                CoursesStudent::create([
+                    "course_id" => $newDetail["course_id"],
+                    "user_id" => auth('api')->user()->id,
+                ]);
+            }
+            if($if_existProduct){
+                ProductStudent::create([
+                    "product_id" => $newDetail["product_id"],
+                    "user_id" => auth('api')->user()->id,
+                ]);
+            }
+            
+            
             $cart->delete();
         }
         Mail::to($sale->user->email)->send(new SaleMail($sale));

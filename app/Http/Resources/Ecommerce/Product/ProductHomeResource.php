@@ -51,7 +51,7 @@ class ProductHomeResource extends JsonResource
             'price_bves'=>$this->resource-> price_bves,
             'count_class'=>$this->resource-> count_class,
             // 'time'=>$this->resource-> time,
-            'time_course'=>$this->resource-> time_course,
+            // 'time_video'=>$this->resource-> time_video,
             'idioma'=>$this->resource-> idioma,
             'level'=>$this->resource-> level,
             'discount_g'=>$discount_g,

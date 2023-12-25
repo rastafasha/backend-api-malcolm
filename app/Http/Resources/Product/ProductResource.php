@@ -24,6 +24,13 @@ class ProductResource extends JsonResource
                 'price_bves'=>$this->resource-> price_bves,
                 "imagen"=> $this->resource->imagen ? env("APP_URL")."storage/".$this->resource->imagen : null,
                 // "imagen"=> $this->resource->imagen ? env("APP_URL").$this->resource->imagen : null,
+                'category_sale_id'=>$this->resource->category_sale_id,
+                
+                "sale_category" =>$this->resource->sale_category ?
+                [
+                    'id'=> $this->resource->sale_category->id,
+                    'name'=> $this->resource->sale_category->name
+                ]: NUll,
                 'category_product_id'=>$this->resource->category_product_id,
                 'categories_product'=>[
                     'id'=> $this->resource->categories_product->id,
@@ -32,7 +39,7 @@ class ProductResource extends JsonResource
                 'sub_category_id'=>$this->resource->sub_category_id,
                 'sub_category'=>[
                     'id'=> $this->resource->sub_category->id,
-                    'name'=> $this->resource->sub_category->nombre
+                    'nombre'=> $this->resource->sub_category->nombre
                 ],
                 'user_id'=>$this->resource-> user_id,
                 'user'=>[

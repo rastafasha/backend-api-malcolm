@@ -8,6 +8,10 @@ use App\Http\Controllers\admin\todoController;
 
 Route::get('/todo', [todoController::class, 'index'])
     ->name('todo.index');
+Route::get('/todo/pendientes', [todoController::class, 'pendientes'])
+    ->name('todo.pendientes');
+    Route::get('/todo/terminados', [todoController::class, 'terminados'])
+    ->name('todo.terminados');
 
 Route::post('/todo/store', [todoController::class, 'store'])
     ->name('todo.store');

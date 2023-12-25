@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Portafolio;
 
 use App\Models\User;
-use App\Models\Categoria;
+use App\Models\Portafolio\Categoria;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,7 +20,7 @@ class Portafolio extends Model
         'popup',
         'url',
         'user_id',
-        'category_id',
+        'category_portafolio_id',
         'imagen',
         'status',
     ];
@@ -65,7 +65,7 @@ class Portafolio extends Model
 
     public function categorias()
     {
-        return $this->belongsTo(Categoria::class, 'category_id');
+        return $this->belongsTo(Categoria::class);
     }
 
 
